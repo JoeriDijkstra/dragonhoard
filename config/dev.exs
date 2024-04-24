@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :dragonhoard, Dragonhoard.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "password",
   hostname: "localhost",
   database: "dragonhoard_dev",
   stacktrace: true,
