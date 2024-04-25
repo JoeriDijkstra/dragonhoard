@@ -8,6 +8,7 @@ defmodule Dragonhoard.Inventory.Item do
     field :name, :string
     field :description, :string
     field :amount, :integer
+    field :extra_info, :string
 
     timestamps(type: :utc_datetime)
   end
@@ -15,7 +16,7 @@ defmodule Dragonhoard.Inventory.Item do
   @doc false
   def changeset(item, attrs) do
     item
-    |> cast(attrs, [:name, :description, :amount])
+    |> cast(attrs, [:name, :description, :amount, :extra_info])
     |> validate_required([:name, :description, :amount])
   end
 end

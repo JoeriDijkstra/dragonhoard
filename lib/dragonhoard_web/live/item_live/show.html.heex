@@ -1,20 +1,26 @@
 <.header>
-  Item <%= @item.id %>
-  <:subtitle>This is a item record from your database.</:subtitle>
+  <%= @item.name %>
+  <:subtitle><%= @item.description %></:subtitle>
   <:actions>
+    <.link patch={~p"/items"}>
+      <.button class="bg-brand"><.icon name="hero-arrow-left-circle-solid" /></.button>
+    </.link>
     <.link patch={~p"/items/#{@item}/show/edit"} phx-click={JS.push_focus()}>
-      <.button>Edit item</.button>
+      <.button>Edit</.button>
     </.link>
   </:actions>
 </.header>
 
-<.list>
-  <:item title="Name"><%= @item.name %></:item>
-  <:item title="Description"><%= @item.description %></:item>
-  <:item title="Amount"><%= @item.amount %></:item>
-</.list>
-
-<.back navigate={~p"/items"}>Back to items</.back>
+<div class="max-w-2xl">
+  <hr class="my-6" />
+  <.form
+    for={@form}
+    id="item-form"
+    phx-change="save"
+    >
+    <.input field={@form[:extra_info]} type="textarea" placeholder="Additional info" rows="12" value={@item.extra_info || ""} phx-debounce="1500" />
+  </.form>
+</div>
 
 <.modal :if={@live_action == :edit} id="item-modal" show on_cancel={JS.patch(~p"/items/#{@item}")}>
   <.live_component

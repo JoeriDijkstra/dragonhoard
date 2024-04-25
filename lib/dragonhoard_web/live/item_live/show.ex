@@ -10,10 +10,30 @@ defmodule DragonhoardWeb.ItemLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
+    item = Inventory.get_item!(id)
+    changeset = Inventory.change_item(item)
+
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:item, Inventory.get_item!(id))}
+     |> assign_form(changeset)
+     |> assign(:item, item)}
+  end
+
+  @impl true
+  def handle_event("save", %{"item" => item_params}, socket) do
+    case Inventory.update_item(socket.assigns.item, item_params) do
+      {:ok, item} ->
+        {:noreply,
+         put_flash(socket, :info, "Item updated successfully")}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, put_flash(socket, :success, "Error updating item")}
+    end
+  end
+
+  defp assign_form(socket, %Ecto.Changeset{} = changeset) do
+    assign(socket, :form, to_form(changeset))
   end
 
   defp page_title(:show), do: "Show Item"
