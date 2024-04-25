@@ -5,7 +5,7 @@ defmodule DragonhoardWeb.UserResetPasswordLive do
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
+    <div class="mx-auto max-w-lg bg-white p-6 rounded-lg">
       <.header class="text-center">Reset Password</.header>
 
       <.simple_form
