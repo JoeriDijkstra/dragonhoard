@@ -7,7 +7,7 @@
         </a>
         <h1 class="font-xl font-extrabold">Dragonhoard</h1>
         <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
-          v0.0.1
+          v<%= Application.spec(:dragonhoard)[:vsn] %>
         </p>
       </div>
 
@@ -23,7 +23,13 @@
           href={~p"/items"}
           class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2"
         >
-          <.icon name="hero-user-solid" /> My Items
+          <.icon name="hero-user-solid" /> Owned Items
+        </.link>
+        <.link
+          href={~p"/items"}
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2"
+        >
+          <.icon name="hero-inbox-solid" /> Held Items
         </.link>
         <.link
           href={~p"/items"}
@@ -61,7 +67,7 @@
       <% end %>
     </nav>
   </aside>
-  <main class="px-4 py-20 sm:px-6 lg:px-8 w-full">
+  <main class="px-4 py-4 sm:px-6 lg:px-8 w-full">
     <.flash_group flash={@flash} />
     <%= @inner_content %>
   </main>

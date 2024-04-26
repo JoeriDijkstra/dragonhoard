@@ -1,6 +1,6 @@
-<.header>
-  <%= @item.name %>
-  <:subtitle><%= @item.description %></:subtitle>
+<div class="max-w-2xl m-auto">
+  <.header>
+  <h1 class="px-4 text-xl"><%= @item.name %></h1>
   <:actions>
     <.link patch={~p"/items"}>
       <.button class="bg-brand"><.icon name="hero-arrow-left-circle-solid" /></.button>
@@ -8,11 +8,18 @@
     <.link patch={~p"/items/#{@item}/show/edit"} phx-click={JS.push_focus()}>
       <.button>Edit</.button>
     </.link>
+    <.link patch={~p"/items/#{@item}/show/edit"} phx-click={JS.push_focus()}>
+      <.button class="bg-brand">Request</.button>
+    </.link>
   </:actions>
 </.header>
-
-<div class="max-w-2xl">
-  <hr class="my-6" />
+<hr class="my-6" />
+<ul class="px-4 text-zinc-600 font-light font-tight">
+  <li>Description: <%= @item.description %></li>
+  <li>Owned by: </li>
+  <li>Held by: </li>
+</ul>
+<hr class="my-6" />
   <.form
     for={@form}
     id="item-form"
@@ -20,7 +27,6 @@
     >
     <.input field={@form[:extra_info]} type="textarea" placeholder="Additional info" rows="12" value={@item.extra_info || ""} phx-debounce="1500" />
   </.form>
-</div>
 
 <.modal :if={@live_action == :edit} id="item-modal" show on_cancel={JS.patch(~p"/items/#{@item}")}>
   <.live_component
@@ -32,3 +38,4 @@
     patch={~p"/items/#{@item}"}
   />
 </.modal>
+</div>
