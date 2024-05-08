@@ -21,7 +21,7 @@ defmodule DragonhoardWeb.ItemLive.FormComponent do
       >
         <.input field={@form[:name]} type="text" label="Name" />
         <.input field={@form[:description]} type="text" label="Description" />
-        <.input field={@form[:amount]} type="number" label="Amount" />
+        <.input field={@form[:amount]} type="number" label="Amount" value="1" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Item</.button>
         </:actions>
@@ -69,8 +69,10 @@ defmodule DragonhoardWeb.ItemLive.FormComponent do
     end
   end
 
-  defp save_item(socket, :new, item_params) do
-    case Inventory.create_item(item_params) do
+  defp save_item(%{assigns: %{current_user: %{id: user_id}}} = socket, :new, item_params) do
+    case Inventory.create_item(
+           Map.merge(item_params, %{"owner_id" => user_id, "holder_id" => user_id})
+         ) do
       {:ok, item} ->
         notify_parent({:saved, item})
 
@@ -80,6 +82,7 @@ defmodule DragonhoardWeb.ItemLive.FormComponent do
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        IO.inspect(changeset)
         {:noreply, assign_form(socket, changeset)}
     end
   end

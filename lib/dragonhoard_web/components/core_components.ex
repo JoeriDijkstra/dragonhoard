@@ -355,7 +355,7 @@ defmodule DragonhoardWeb.CoreComponents do
         id={@id}
         name={@name}
         class={[
-          "rounded-lg bg-zinc-100 border-none w-full h-full focus:bg-zinc-50",
+          "rounded-lg bg-zinc-100 border-none w-full h-full focus:bg-zinc-50 resize-none",
           "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0",
           "min-h-[6rem] phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400",
           @errors == [] && "border-zinc-300 focus:border-zinc-400",

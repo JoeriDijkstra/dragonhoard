@@ -16,8 +16,9 @@
 <hr class="my-6" />
 <ul class="px-4 text-zinc-600 font-light font-tight">
   <li>Description: <%= @item.description %></li>
-  <li>Owned by: </li>
-  <li>Held by: </li>
+  <li>Amount: <%= @item.amount %></li>
+  <li>Owned by: <%= @item.owner.email %></li>
+  <li>Held by: <%= @item.holder.email %></li>
 </ul>
 <hr class="my-6" />
   <.form
@@ -25,7 +26,7 @@
     id="item-form"
     phx-change="save"
     >
-    <.input field={@form[:extra_info]} type="textarea" placeholder="Additional info" rows="12" value={@item.extra_info || ""} phx-debounce="1500" />
+    <.input field={@form[:extra_info]} type="textarea" placeholder="Additional info" rows="16" value={@item.extra_info || ""} phx-debounce="750" />
   </.form>
 
 <.modal :if={@live_action == :edit} id="item-modal" show on_cancel={JS.patch(~p"/items/#{@item}")}>

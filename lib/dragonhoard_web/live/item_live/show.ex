@@ -10,7 +10,7 @@ defmodule DragonhoardWeb.ItemLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
-    item = Inventory.get_item!(id)
+    item = Inventory.get_item!(id, [:owner, :holder])
     changeset = Inventory.change_item(item)
 
     {:noreply,
@@ -24,8 +24,7 @@ defmodule DragonhoardWeb.ItemLive.Show do
   def handle_event("save", %{"item" => item_params}, socket) do
     case Inventory.update_item(socket.assigns.item, item_params) do
       {:ok, _item} ->
-        {:noreply,
-         put_flash(socket, :info, "Item updated successfully")}
+        {:noreply, put_flash(socket, :info, "Item updated successfully")}
 
       {:error, %Ecto.Changeset{}} ->
         {:noreply, put_flash(socket, :error, "Error updating item")}

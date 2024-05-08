@@ -10,13 +10,16 @@ defmodule Dragonhoard.Inventory.Item do
     field :amount, :integer
     field :extra_info, :string
 
+    belongs_to :owner, Dragonhoard.Accounts.User
+    belongs_to :holder, Dragonhoard.Accounts.User
+
     timestamps(type: :utc_datetime)
   end
 
   @doc false
   def changeset(item, attrs) do
     item
-    |> cast(attrs, [:name, :description, :amount, :extra_info])
-    |> validate_required([:name, :description, :amount])
+    |> cast(attrs, [:name, :description, :amount, :extra_info, :owner_id, :holder_id])
+    |> validate_required([:name, :description, :amount, :owner_id, :holder_id])
   end
 end
