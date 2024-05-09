@@ -53,6 +53,7 @@ defmodule DragonhoardWeb.Router do
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
       live "/", ItemLive.Index, :index
       live "/items", ItemLive.Index, :index
+      live "/items/filtered/:filter", ItemLive.Index, :index
       live "/items/new", ItemLive.Index, :new
       live "/items/:id/edit", ItemLive.Index, :edit
       live "/items/:id", ItemLive.Show, :show

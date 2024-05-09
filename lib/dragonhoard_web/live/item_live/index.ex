@@ -5,8 +5,8 @@ defmodule DragonhoardWeb.ItemLive.Index do
   alias Dragonhoard.Inventory.Item
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, stream(socket, :items, Inventory.list_items())}
+  def mount(params, _session, socket) do
+    {:ok, stream(socket, :items, fetch_items(params, socket.assigns.current_user))}
   end
 
   @impl true
@@ -44,4 +44,8 @@ defmodule DragonhoardWeb.ItemLive.Index do
 
     {:noreply, stream_delete(socket, :items, item)}
   end
+
+  defp fetch_items(%{"filter" => "mine"}, user), do: Inventory.my_items(user)
+  defp fetch_items(%{"filter" => "held"}, user), do: Inventory.held_items(user)
+  defp fetch_items(_, _), do: Inventory.list_items()
 end

@@ -12,6 +12,18 @@ defmodule Dragonhoard.Inventory do
     Repo.all(Item)
   end
 
+  def my_items(%{id: user_id}) do
+    user_id
+    |> Item.my_items_query()
+    |> Repo.all()
+  end
+
+  def held_items(%{id: user_id}) do
+    user_id
+    |> Item.held_items_query()
+    |> Repo.all()
+  end
+
   @spec get_item!(binary(), list[atom()]) :: %Item{} | nil
   def get_item!(id, preloads \\ [])
 

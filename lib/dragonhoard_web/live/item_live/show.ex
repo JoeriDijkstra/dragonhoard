@@ -1,4 +1,5 @@
 defmodule DragonhoardWeb.ItemLive.Show do
+  alias Dragonhoard.Accounts
   use DragonhoardWeb, :live_view
 
   alias Dragonhoard.Inventory
@@ -10,14 +11,18 @@ defmodule DragonhoardWeb.ItemLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
+    user = socket.assigns.current_user
     item = Inventory.get_item!(id, [:owner, :holder])
+    users = Enum.map(Accounts.list_users(), & &1.email)
     changeset = Inventory.change_item(item)
 
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign_form(changeset)
-     |> assign(:item, item)}
+     |> assign(:users, users)
+     |> assign(:item, item)
+     |> assign(:current_email, user.email)}
   end
 
   @impl true
