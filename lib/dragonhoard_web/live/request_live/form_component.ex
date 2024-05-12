@@ -19,8 +19,13 @@ defmodule DragonhoardWeb.RequestLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:title]} type="text" label="Title" />
-        <.input field={@form[:amount]} type="number" max={@item.amount} label="Amount" />
+        <.input
+          field={@form[:title]}
+          type="text"
+          label="Title"
+          value={"Requesting #{@item.name} from #{@item.holder.email}"}
+        />
+        <.input field={@form[:amount]} type="number" max={@item.amount} label="Amount" value="1" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Request</.button>
         </:actions>

@@ -33,21 +33,21 @@
         </.link>
         <hr />
         <.link
-          href={~p"/requests/filtered/outgoing"}
+          href={~p"/requests/outgoing"}
           class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2 mt-6"
         >
           <.icon name="hero-archive-box-solid" /> Outgoing requests
-          <span class="invisible inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-bold text-brand bg-brand/5 rounded-full">
-            2
+          <span class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-bold text-brand bg-brand/5 rounded-full">
+            <%= @notifications.outgoing %>
           </span>
         </.link>
         <.link
-          href={~p"/requests/filtered/incoming"}
+          href={~p"/requests/incoming"}
           class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2 mb-6"
         >
           <.icon name="hero-archive-box-arrow-down-solid" /> Incoming requests
-          <span class="invisible inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-bold text-brand bg-brand/5 rounded-full">
-            2
+          <span class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-bold text-brand bg-brand/5 rounded-full">
+            <%= @notifications.incoming %>
           </span>
         </.link>
         <hr />

@@ -36,7 +36,7 @@ defmodule Dragonhoard.Inventory.Item do
     |> validate_required([:name, :description, :amount, :owner_id, :holder_id])
   end
 
-  defp convert_owner(changeset, %{"owner" => owner}) do
+  defp convert_owner(changeset, %{"owner" => owner}) when is_binary(owner) do
     case Repo.get_by(User, email: owner) do
       nil ->
         changeset
@@ -48,7 +48,7 @@ defmodule Dragonhoard.Inventory.Item do
 
   defp convert_owner(changeset, _), do: changeset
 
-  defp convert_holder(changeset, %{"holder" => holder}) do
+  defp convert_holder(changeset, %{"holder" => holder}) when is_binary(holder) do
     case Repo.get_by(User, email: holder) do
       nil ->
         changeset

@@ -6,6 +6,7 @@ defmodule DragonhoardWeb.ItemLive.Index do
 
   @impl true
   def mount(params, _session, socket) do
+    IO.inspect(socket.assigns, label: "socket")
     {:ok, stream(socket, :items, fetch_items(params, socket.assigns.current_user))}
   end
 

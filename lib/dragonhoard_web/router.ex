@@ -48,7 +48,10 @@ defmodule DragonhoardWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     live_session :require_authenticated_user,
-      on_mount: [{DragonhoardWeb.UserAuth, :ensure_authenticated}] do
+      on_mount: [
+        {DragonhoardWeb.UserAuth, :ensure_authenticated},
+        {DragonhoardWeb.Notifications, :put_notifications}
+      ] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
 
@@ -63,8 +66,10 @@ defmodule DragonhoardWeb.Router do
       live "/items/:id/request", ItemLive.Show, :request
 
       # Requests
-      live "/requests", RequestLive.Index, :index
-      live "/requests/filtered/:filter", RequestLive.Index, :index
+      live "/requests/incoming", RequestLive.Incoming, :index
+      live "/requests/outgoing", RequestLive.Outgoing, :index
+      live "/requests/:id/approve", RequestLive.Incoming, :approve
+      live "/requests/:id/deny", RequestLive.Incoming, :deny
     end
   end
 
