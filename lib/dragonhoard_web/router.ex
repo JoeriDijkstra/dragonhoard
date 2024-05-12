@@ -51,6 +51,8 @@ defmodule DragonhoardWeb.Router do
       on_mount: [{DragonhoardWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+
+      # Items
       live "/", ItemLive.Index, :index
       live "/items", ItemLive.Index, :index
       live "/items/filtered/:filter", ItemLive.Index, :index
@@ -58,6 +60,11 @@ defmodule DragonhoardWeb.Router do
       live "/items/:id/edit", ItemLive.Index, :edit
       live "/items/:id", ItemLive.Show, :show
       live "/items/:id/show/edit", ItemLive.Show, :edit
+      live "/items/:id/request", ItemLive.Show, :request
+
+      # Requests
+      live "/requests", RequestLive.Index, :index
+      live "/requests/filtered/:filter", RequestLive.Index, :index
     end
   end
 

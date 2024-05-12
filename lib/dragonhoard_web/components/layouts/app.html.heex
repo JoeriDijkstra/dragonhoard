@@ -2,7 +2,7 @@
   <aside class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 h- w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 fixed">
     <nav class="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700">
       <div class="flex items-center gap-4">
-        <a href="/items">
+        <a href="/">
           <img src={~p"/images/dragon.png"} width="48" />
         </a>
         <h1 class="font-xl font-extrabold">Dragonhoard</h1>
@@ -27,15 +27,28 @@
         </.link>
         <.link
           href={~p"/items/filtered/held"}
-          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2"
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2 mb-6"
         >
           <.icon name="hero-inbox-solid" /> Held Items
         </.link>
+        <hr />
         <.link
-          href={~p"/items"}
+          href={~p"/requests/filtered/outgoing"}
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2 mt-6"
+        >
+          <.icon name="hero-archive-box-solid" /> Outgoing requests
+          <span class="invisible inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-bold text-brand bg-brand/5 rounded-full">
+            2
+          </span>
+        </.link>
+        <.link
+          href={~p"/requests/filtered/incoming"}
           class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2 mb-6"
         >
-          <.icon name="hero-archive-box-arrow-down-solid" /> My requests
+          <.icon name="hero-archive-box-arrow-down-solid" /> Incoming requests
+          <span class="invisible inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-bold text-brand bg-brand/5 rounded-full">
+            2
+          </span>
         </.link>
         <hr />
         <.link
@@ -52,6 +65,12 @@
           <.icon name="hero-arrow-left-start-on-rectangle-solid" class="text-brand" /> Log out
         </.link>
       <% else %>
+        <.link
+          href={~p"/"}
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2"
+        >
+          Home
+        </.link>
         <.link
           href={~p"/users/register"}
           class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2"

@@ -8,9 +8,13 @@
       <.link patch={~p"/items/#{@item}/show/edit"} phx-click={JS.push_focus()}>
         <.button>Edit</.button>
       </.link>
-      <.link patch={~p"/items/#{@item}/show/edit"} phx-click={JS.push_focus()}>
-        <.button class="bg-brand">Request</.button>
+      <%= if @item.holder.email != @current_email do %>
+      <.link patch={~p"/items/#{@item}/request"}>
+        <.button>Request</.button>
       </.link>
+      <% else %>
+        <.button class="bg-zinc-700 text-zinc-200">Request</.button>
+      <% end %>
     </:actions>
   </.header>
   <hr class="my-6" />
@@ -81,6 +85,24 @@
       action={@live_action}
       item={@item}
       patch={~p"/items/#{@item}"}
+    />
+  </.modal>
+
+  <.modal
+    :if={@live_action in [:request]}
+    id="request-modal"
+    show
+    on_cancel={JS.patch(~p"/items/#{@item}")}
+  >
+    <.live_component
+      module={DragonhoardWeb.RequestLive.FormComponent}
+      id={@request.id || :new}
+      title={@page_title}
+      action={@live_action}
+      request={@request}
+      patch={~p"/items/#{@item}"}
+      current_user={@current_user}
+      item={@item}
     />
   </.modal>
 </div>
