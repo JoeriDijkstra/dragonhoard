@@ -1,14 +1,10 @@
 <.header>
   Incoming Requests
-  <:actions>
-    <.link patch={~p"/requests/new"}>
-      <.button>New Request</.button>
-    </.link>
-  </:actions>
 </.header>
 
 <.table id="requests" rows={@streams.requests} row_click={fn {_id, request} -> JS.navigate(~p"/items/#{request.item}") end}>
   <:col :let={{_id, request}} label="Title"><%= request.title %></:col>
+  <:col :let={{_id, request}} label="Item"><%= request.item.name %></:col>
   <:col :let={{_id, request}} label="By"><%= request.user.email %></:col>
   <:col :let={{_id, request}} label="At"><%= request.inserted_at %></:col>
   <:action :let={{_id, request}}>
