@@ -8,7 +8,7 @@ defmodule Dragonhoard.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"Dragonhoard", "contact@example.com"})
+      |> from({"Dragonhoard", "joeri_dijkstra@outlook.com"})
       |> subject(subject)
       |> text_body(body)
 
