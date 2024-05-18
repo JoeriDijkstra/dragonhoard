@@ -1,18 +1,8 @@
 # Dragonhoard
 
-To start your Phoenix server:
+Dragonhoard is an inventory management tool. There is no hierarchy in dragonhoard, every user has the same permissions. You own your items, but you can request items from other people, and become the "holder" of te item. 
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+Dragonhoard was made for a shared inventory for Dungeons and Dragons, where we can share minis, battlemats and those kinds of things.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+## Hosting
+The idea behind Dragonhoard is that everyone can download it and host it themselves. 
