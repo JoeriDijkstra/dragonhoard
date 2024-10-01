@@ -2,14 +2,32 @@
 <html lang="en" class="[scrollbar-gutter:stable]">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Dragonhoard" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <meta name="csrf-token" content={get_csrf_token()} />
     <.live_title suffix=" · Dragonhoard">
       <%= assigns[:page_title] || "Dragonhoard" %>
     </.live_title>
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <link phx-track-static rel="manifest" href="/manifest.json" />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"} />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js" />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href={~p"/assets/images/icons/apple-152x152.png"}
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href={~p"/assets/images/icons/apple-180x180.png"}
+    />
+    <link rel="apple-touch-icon" href={~p"/assets/images/dragon.png"} />
   </head>
   <body class="bg-zinc-100 antialiased">
     <%= @inner_content %>
