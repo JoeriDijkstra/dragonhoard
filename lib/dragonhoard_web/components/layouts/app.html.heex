@@ -1,5 +1,5 @@
-<div class="flex min-h-screen">
-  <aside class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 h- w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 fixed">
+<div class="lg:flex min-h-screen">
+  <aside class="max-md:hidden relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 h- w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
     <nav class="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700">
       <div class="flex items-center gap-4">
         <a href="/">
@@ -86,6 +86,103 @@
       <% end %>
     </nav>
   </aside>
+
+  <header class="hidden max-md:block w-full bg-clip-border bg-white text-gray-700 p-4 shadow-xl shadow-blue-gray-900/5 rounded-xl">
+    <div class="flex items-center gap-4">
+      <a href="/">
+        <img src={~p"/images/dragon.png"} width="48" />
+      </a>
+      <h1 class="font-xl font-extrabold">Dragonhoard</h1>
+      <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
+        v<%= Application.spec(:dragonhoard)[:vsn] %>
+      </p>
+      <div class="flex-auto" />
+      <button data-dropdown-toggle="navbarDropDown" type="button">
+        <.icon name="hero-bars-3" />
+      </button>
+    </div>
+  </header>
+
+  <div
+    id="navbarDropDown"
+    class="hidden z-10 w-full bg-clip-border bg-white text-gray-700 p-4 shadow-xl shadow-blue-gray-900/5 rounded-xl mt-2"
+  >
+    <nav class="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700">
+      <%= if @current_user do %>
+        <.link
+          href={~p"/items"}
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2"
+        >
+          <.icon name="hero-circle-stack-solid" /> Item registry
+        </.link>
+        <.link
+          href={~p"/items/filtered/mine"}
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2"
+        >
+          <.icon name="hero-user-solid" /> Owned Items
+        </.link>
+        <.link
+          href={~p"/items/filtered/held"}
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2 mb-6"
+        >
+          <.icon name="hero-inbox-solid" /> Held Items
+        </.link>
+        <hr />
+        <.link
+          href={~p"/requests/outgoing"}
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2 mt-6"
+        >
+          <.icon name="hero-archive-box-solid" /> Outgoing requests
+          <span class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-bold text-brand bg-brand/5 rounded-full">
+            <%= @notifications.outgoing %>
+          </span>
+        </.link>
+        <.link
+          href={~p"/requests/incoming"}
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2 mb-6"
+        >
+          <.icon name="hero-archive-box-arrow-down-solid" /> Incoming requests
+          <span class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-bold text-brand bg-brand/5 rounded-full">
+            <%= @notifications.incoming %>
+          </span>
+        </.link>
+        <hr />
+        <.link
+          href={~p"/users/settings"}
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2 mt-6"
+        >
+          <.icon name="hero-cog-6-tooth-solid" /> Settings
+        </.link>
+        <.link
+          href={~p"/users/log_out"}
+          method="delete"
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2 bottom-0"
+        >
+          <.icon name="hero-arrow-left-start-on-rectangle-solid" class="text-brand" /> Log out
+        </.link>
+      <% else %>
+        <.link
+          href={~p"/"}
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2"
+        >
+          Home
+        </.link>
+        <.link
+          href={~p"/users/register"}
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2"
+        >
+          Register
+        </.link>
+        <.link
+          href={~p"/users/log_in"}
+          class="leading-6 text-zinc-900 font-semibold hover:text-zinc-700 px-4 py-2"
+        >
+          Log in
+        </.link>
+      <% end %>
+    </nav>
+  </div>
+
   <main class="px-4 py-4 sm:px-6 lg:px-8 w-full">
     <.flash_group flash={@flash} />
     <%= @inner_content %>
