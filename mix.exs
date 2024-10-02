@@ -4,7 +4,7 @@ defmodule Dragonhoard.MixProject do
   def project do
     [
       app: :dragonhoard,
-      version: "1.2.4",
+      version: "1.2.5",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
